@@ -52,7 +52,7 @@ const getCacheContent = async () => {
       });
     })
     .then(() => {
-      log(`Cache clearing: end`);
+      log(`Cache getting: end`);
       document.getElementById('cacheContent').innerHTML = cacheContent;
       return cacheContent;
     });
