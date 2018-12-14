@@ -4,6 +4,7 @@ body {
   width: 100%;
   min-height: 100vh;
   color: #dadada;
+  font-size: 18px;
 }
 
 a {
@@ -20,4 +21,6 @@ pre {
   padding: 16px;
   background: #123456;
   color: #00ff00;
+  word-break: break-all;
+  white-space: pre-wrap;
 }

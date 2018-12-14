@@ -12,7 +12,7 @@ const registerServiceWorker = () => {
   if (navigator.serviceWorker) {
     log('Service Worker is trying to register');
     navigator.serviceWorker
-      .register('./service-worker.js', { scope: './' })
+      .register('/service-worker.js', { scope: './' })
       .then(registration => log(registration, 'Success'))
       .catch(err => log(err, 'Error'));
   } else {
