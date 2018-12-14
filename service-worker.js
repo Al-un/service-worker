@@ -2,8 +2,8 @@ function log(obj) {
   console.log(obj);
 }
 
-const CACHE_VERSION = 'sw-v1';
-const CACHE_FILES = ['/', 'img/miku.png', 'index.js', 'main.css'];
+const CACHE_VERSION = 'sw-v2';
+const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
 
 /**
  * Installing SW
