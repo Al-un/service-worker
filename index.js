@@ -31,6 +31,7 @@ const registerServiceWorker = () => {
 const clearCacheStorage = async () => {
   caches.keys().then(keyList => {
     keyList.forEach(key => {
+      log(`Cache clearing: deleting key ${key}`);
       caches.delete(key);
     });
   });
