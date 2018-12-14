@@ -10,7 +10,6 @@ const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
  */
 self.addEventListener('install', event => {
   log('[SW] installing');
-  log(event);
   event.waitUntil(
     caches.open(CACHE_VERSION).then(cache => {
       log(`Opening cache version ${CACHE_VERSION}`);
@@ -24,7 +23,6 @@ self.addEventListener('install', event => {
  */
 self.addEventListener('activate', event => {
   log('[SW] activating');
-  log(event);
 });
 
 /**
@@ -32,7 +30,6 @@ self.addEventListener('activate', event => {
  */
 self.addEventListener('fetch', event => {
   log(`[SW] fetching URL ${event.request.url}`);
-  log(event);
   event.respondWith(
     caches.match(event.request).then(res => {
       if (res) {
@@ -43,7 +40,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-const requestBackend = event => {
+const requestBackend = async (event) => {
   const url = event.request.clone();
   return fetch(url).then(res => {
     // if not a valid response, send the error
