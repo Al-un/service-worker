@@ -7,12 +7,16 @@ const log = (msg, lvl = 'Info') => {
   outputDiv.innerHTML += log;
 };
 
-// Register service worker
+/**
+ * Register the service worker.
+ *
+ * MDN documentation: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
+ */
 const registerServiceWorker = () => {
   if (navigator.serviceWorker) {
     log('Service Worker is trying to register');
     navigator.serviceWorker
-      .register('/service-worker.js', { scope: './' })
+      .register('./service-worker.js')
       .then(registration => log(registration, 'Success'))
       .catch(err => log(err, 'Error'));
   } else {
