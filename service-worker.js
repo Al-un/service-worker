@@ -31,6 +31,32 @@ self.addEventListener('activate', event => {
  * Intercept request
  */
 self.addEventListener('fetch', event => {
-  log('[SW] fetching');
+  log(`[SW] fetching URL ${event.request.url}`);
   log(event);
+  event.respondWith(
+    caches.match(event.request).then(res => {
+      if (res) {
+        return res;
+      }
+      requestBackend(event);
+    })
+  );
 });
+
+const requestBackend = event => {
+  const url = event.request.clone();
+  return fetch(url).then(res => {
+    // if not a valid response, send the error
+    if (!res || res.status !== 200 || res.type !== 'basic') {
+      return res;
+    }
+
+    const response = res.clone();
+
+    caches.open(CACHE_VERSION).then(cache => {
+      cache.put(event.request, response);
+    });
+
+    return res;
+  });
+};
