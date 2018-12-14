@@ -23,6 +23,17 @@ self.addEventListener('install', event => {
  */
 self.addEventListener('activate', event => {
   log('[SW] activating');
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map((key, index) => {
+          if (key !== CACHE_VERSION) {
+            return caches.delete(keys[index]);
+          }
+        })
+      );
+    })
+  );
 });
 
 /**
@@ -40,7 +51,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-const requestBackend = async (event) => {
+const requestBackend = async event => {
   const url = event.request.clone();
   return fetch(url).then(res => {
     // if not a valid response, send the error

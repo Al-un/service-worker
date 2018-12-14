@@ -41,8 +41,26 @@ const clearCacheStorage = async () => {
     .then(() => log(`Cache clearing: end`));
 };
 
+const getCacheContent = async () => {
+  log(`Cache getting: start`);
+  let cacheContent = '';
+  caches
+    .keys()
+    .then(keyList => {
+      keyList.forEach(key => {
+        cacheContent += `<p>${key}</p>`;
+      });
+    })
+    .then(() => {
+      log(`Cache clearing: end`);
+      document.getElementById('cacheContent').innerHTML = cacheContent;
+      return cacheContent;
+    });
+};
+
 // Run !!
 window.onload = () => {
   log('index.js is running!');
   registerServiceWorker();
+  getCacheContent();
 };
