@@ -1,18 +1,9 @@
 /**
- * Bad bad!!! copy pasted from index.js
- * @param {*} msg
- * @param {*} lvl
+ * SW has not access to DOM
+ * @param {*} msg 
  */
-const log = (msg, lvl = 'Info') => {
-  // Console logging
+const log = (msg) => {
   console.log(msg);
-
-  // Output logging
-  const outputDiv = document.getElementById('output');
-  const time = new Date().toLocaleTimeString('en', { hour12: false });
-  msg = typeof msg === 'object' ? JSON.stringify(msg) : msg;
-  const log = `${time} ${lvl ? '[' + lvl + '] ' : ''}${msg}\n`;
-  outputDiv.innerHTML += log;
 };
 
 /**
