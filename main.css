@@ -1,0 +1,23 @@
+body {
+  background: #424242;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  color: #dadada;
+}
+
+a {
+  color: #dadada;
+}
+
+#container {
+  margin: auto;
+  max-width: 1200px;
+  width: 94%;
+}
+
+pre {
+  padding: 16px;
+  background: #123456;
+  color: #00ff00;
+}
