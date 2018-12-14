@@ -28,7 +28,7 @@ const registerServiceWorker = () => {
   }
 };
 
-const clearCacheStorage = async () => {
+const clearCacheStorage = () => {
   log(`Cache clearing: start`);
   caches
     .keys()
@@ -41,7 +41,7 @@ const clearCacheStorage = async () => {
     .then(() => log(`Cache clearing: end`));
 };
 
-const getCacheContent = async () => {
+const getCacheContent = () => {
   log(`Cache getting: start`);
   let cacheContent = '';
   caches
