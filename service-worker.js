@@ -1,20 +1,27 @@
+function log(obj) {
+  console.log(obj);
+}
+
 /**
  * Installing SW
  */
 self.addEventListener('install', event => {
-  console.log(event);
+  log('[SW] installing');
+  log(event);
 });
 
 /**
  * Activating SW
  */
 self.addEventListener('activate', event => {
-  console.log(event);
+  log('[SW] activating');
+  log(event);
 });
 
 /**
  * Intercept request
  */
 self.addEventListener('fetch', event => {
-  console.log(event);
+  log('[SW] fetching');
+  log(event);
 });
