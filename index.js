@@ -48,12 +48,19 @@ const getCacheContent = async () => {
     .keys()
     .then(keyList => {
       keyList.forEach(key => {
-        cacheContent += `<p>${key}</p>`;
+        cacheContent += `<p>Cache: ${key}</p>`;
+        console.log('building: ' + cacheContent);
+        caches.open(key).then(cache => {
+          cache.keys().then(url => {
+            cacheContent += `<p>url: ${url}</p>`;
+            console.log('building: ' + cacheContent);
+          });
+        });
       });
     })
     .then(() => {
       log(`Cache getting: end`);
-      document.getElementById('cacheContent').innerHTML = cacheContent;
+      document.getElementById('cacheContent').innerHTML += cacheContent;
       return cacheContent;
     });
 };
