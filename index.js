@@ -53,7 +53,9 @@ const getCacheContent = async () => {
   const openedCaches = await cacheKeys.map(key => caches.open(key));
   console.log(`Loaded openedCaches: ${openedCaches.length}`);
 
-  openedCaches.forEach(openedCache => {
+  // https://stackoverflow.com/a/37576787/4906586
+  // cannot use forEach
+  for (const openedCaches of openedCaches) {
     console.log(`opened cache: ${openedCache}`);
     console.log(`${openedCache}`);
     const openedCachesKeys = await openedCache.keys();
@@ -61,7 +63,11 @@ const getCacheContent = async () => {
       console.log(`opened cache key: ${openedCacheKey}`);
       console.log(`${openedCacheKey}`);
     });
-  });
+  }
+  // openedCaches.forEach(openedCache => {
+  //   console.log(`opened cache: ${openedCache}`);
+  //   console.log(`${openedCache}`);
+  // });
 
   caches
     .keys()
