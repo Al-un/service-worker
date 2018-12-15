@@ -59,7 +59,7 @@ const getCacheContent = async () => {
     console.log(`opening cache: ${openingCache}`);
     console.log(`${openingCache}`);
 
-    const openedCache = await openingCache.resolve();
+    const openedCache = await openingCache;
     console.log(`opened cache: ${openedCache}`);
     console.log(`${openedCache}`);
 
