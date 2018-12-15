@@ -70,7 +70,7 @@ const getCacheContent = async () => {
         console.log(`${openedCacheKey}`);
         return `<p>JSON.stringify(openedCacheKey)</p>`;
       })
-      .reduce('', (a, b) => a + '' + b);
+      .reduce((a, b) => a + '' + b);
       document.getElementById('cacheContent').innerHTML += openedCachesKeysTxt;
   }
   // openedCaches.forEach(openedCache => {
