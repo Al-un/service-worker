@@ -55,7 +55,7 @@ const getCacheContent = async () => {
 
   // https://stackoverflow.com/a/37576787/4906586
   // cannot use forEach
-  for (const openedCaches of openedCaches) {
+  for (const openedCache of openedCaches) {
     console.log(`opened cache: ${openedCache}`);
     console.log(`${openedCache}`);
     const openedCachesKeys = await openedCache.keys();
