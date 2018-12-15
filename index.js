@@ -41,7 +41,7 @@ const clearCacheStorage = () => {
     .then(() => log(`Cache clearing: end`));
 };
 
-const getCacheContent = () => {
+const getCacheContent = async () => {
   log(`Cache getting: start`);
   let cacheContent = '';
 
