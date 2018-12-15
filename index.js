@@ -60,7 +60,7 @@ const getCacheContent = async () => {
     let openedCacheKeysTxt = `<p>${key}</p>`;
 
     const cache = await caches.open(key);
-    console.log(`opened cache:`, openedCache);
+    console.log(`opened cache:`, cache);
 
     const cacheKeys = await cache.keys();
     openedCacheKeysTxt = cacheKeys
