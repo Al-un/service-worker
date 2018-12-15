@@ -50,7 +50,7 @@ const getCacheContent = async () => {
 
   cacheKeys.forEach(cacheKey => console.log(`Await cacheKey: ${cacheKey}`));
 
-  const openedCaches = await caches.keys().map(key => caches.open(key));
+  const openedCaches = await cacheKeys.map(key => caches.open(key));
 
   openedCaches.forEach(openedCache => {
     console.log(`opened cache: ${openedCache}`);
