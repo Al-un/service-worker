@@ -66,9 +66,9 @@ const getCacheContent = async () => {
     const openedCachesKeys = await openedCache.keys();
     const openedCachesKeysTxt = openedCachesKeys
       .map(openedCacheKey => {
-        console.log(`opened cache key: ${JSON.stringify(openedCacheKey)}`);
+        console.log(`opened cache key:`);
         console.log(`${openedCacheKey}`);
-        return `<p>${JSON.stringify(openedCacheKey)}</p>`;
+        return `<p>${openedCacheKey.url}</p>`;
       })
       .reduce((a, b) => a + '' + b);
     document.getElementById('cacheContent').innerHTML += openedCachesKeysTxt;
