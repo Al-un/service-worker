@@ -56,51 +56,22 @@ const getCacheContent = async () => {
   // https://stackoverflow.com/a/37576787/4906586
   // cannot use forEach
   for (const openingCache of openedCaches) {
-    console.log(`opening cache: ${openingCache}`);
-    // console.log(`${openingCache}`);
+    console.log(`opening cache:`, openingCache);
 
     const openedCache = await openingCache;
-    console.log(`opened cache: ${JSON.stringify(openedCache)}`);
-    // console.log(`${openedCache}`);
+    console.log(`opened cache:`, openedCache);
+    let openedCachesKeysTxt = `<p>${JSON.stringify(openingCache)}</p>`;
 
     const openedCachesKeys = await openedCache.keys();
-    const openedCachesKeysTxt = openedCachesKeys
+    openedCachesKeysTxt = openedCachesKeys
       .map(openedCacheKey => {
-        console.log(`opened cache key:`);
-        console.log(`${openedCacheKey}`);
-        return `<p>${openedCacheKey.url}</p>`;
+        console.log(`opened cache key:`, openedCacheKey);
+        return `<li>${openedCacheKey.url}</li>`;
       })
       .reduce((a, b) => a + '' + b);
+    openedCachesKeysTxt = `<ul>${openedCachesKeysTxt}</ul>`;
     document.getElementById('cacheContent').innerHTML += openedCachesKeysTxt;
   }
-  // openedCaches.forEach(openedCache => {
-  //   console.log(`opened cache: ${openedCache}`);
-  //   console.log(`${openedCache}`);
-  // });
-
-  // caches
-  //   .keys()
-  //   .then(keyList => {
-  //     let cacheContent = keyList.forEach(key => {
-  //       console.log('building key: ' + key);
-  //       content = caches.open(key).then(cache => {
-  //         return cache.keys().then(keys => {
-  //           return keys.reduce((concat, key) => {
-  //             console.log('reducing url: ' + key);
-  //             return concat + `<p>url: ${key}</p>`;
-  //           });
-  //         });
-  //       });
-
-  //       return `<p>Cache: ${key}</p>` + content;
-  //     });
-  //     return cacheContent;
-  //   })
-  //   .then(cacheContent => {
-  //     log(`Cache getting: end => ${cacheContent}`);
-  //     document.getElementById('cacheContent').innerHTML += cacheContent;
-  //     return cacheContent;
-  //   });
 };
 
 // Run !!
