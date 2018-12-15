@@ -47,19 +47,23 @@ const getCacheContent = () => {
   caches
     .keys()
     .then(keyList => {
-      keyList.forEach(key => {
-        cacheContent += `<p>Cache: ${key}</p>`;
-        console.log('building: ' + cacheContent);
-        caches.open(key).then(cache => {
-          cache.keys().then(url => {
-            cacheContent += `<p>url: ${url}</p>`;
-            console.log('building: ' + cacheContent);
+      let cacheContent = keyList.forEach(key => {
+        console.log('building key: ' + key);
+        content = caches.open(key).then(cache => {
+          return cache.keys().then(keys => {
+            return keys.reduce((concat, key) => {
+              console.log('reducing url: ' + key);
+              return concat + `<p>url: ${key}</p>`;
+            });
           });
         });
+
+        return `<p>Cache: ${key}</p>` + content;
       });
+      return cacheContent;
     })
     .then(() => {
-      log(`Cache getting: end`);
+      log(`Cache getting: end => ${cacheContent}`);
       document.getElementById('cacheContent').innerHTML += cacheContent;
       return cacheContent;
     });
