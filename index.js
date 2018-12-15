@@ -64,39 +64,43 @@ const getCacheContent = async () => {
     // console.log(`${openedCache}`);
 
     const openedCachesKeys = await openedCache.keys();
-    openedCachesKeys.forEach(openedCacheKey => {
-      console.log(`opened cache key: ${JSON.stringify(openedCacheKey)}`);
-      console.log(`${openedCacheKey}`);
-    });
+    const openedCachesKeysTxt = openedCachesKeys
+      .map(openedCacheKey => {
+        console.log(`opened cache key: ${JSON.stringify(openedCacheKey)}`);
+        console.log(`${openedCacheKey}`);
+        return `<p>JSON.stringify(openedCacheKey)</p>`;
+      })
+      .reduce('', (a, b) => a + '' + b);
+      document.getElementById('cacheContent').innerHTML += openedCachesKeysTxt;
   }
   // openedCaches.forEach(openedCache => {
   //   console.log(`opened cache: ${openedCache}`);
   //   console.log(`${openedCache}`);
   // });
 
-  caches
-    .keys()
-    .then(keyList => {
-      let cacheContent = keyList.forEach(key => {
-        console.log('building key: ' + key);
-        content = caches.open(key).then(cache => {
-          return cache.keys().then(keys => {
-            return keys.reduce((concat, key) => {
-              console.log('reducing url: ' + key);
-              return concat + `<p>url: ${key}</p>`;
-            });
-          });
-        });
+  // caches
+  //   .keys()
+  //   .then(keyList => {
+  //     let cacheContent = keyList.forEach(key => {
+  //       console.log('building key: ' + key);
+  //       content = caches.open(key).then(cache => {
+  //         return cache.keys().then(keys => {
+  //           return keys.reduce((concat, key) => {
+  //             console.log('reducing url: ' + key);
+  //             return concat + `<p>url: ${key}</p>`;
+  //           });
+  //         });
+  //       });
 
-        return `<p>Cache: ${key}</p>` + content;
-      });
-      return cacheContent;
-    })
-    .then(cacheContent => {
-      log(`Cache getting: end => ${cacheContent}`);
-      document.getElementById('cacheContent').innerHTML += cacheContent;
-      return cacheContent;
-    });
+  //       return `<p>Cache: ${key}</p>` + content;
+  //     });
+  //     return cacheContent;
+  //   })
+  //   .then(cacheContent => {
+  //     log(`Cache getting: end => ${cacheContent}`);
+  //     document.getElementById('cacheContent').innerHTML += cacheContent;
+  //     return cacheContent;
+  //   });
 };
 
 // Run !!
