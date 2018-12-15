@@ -47,7 +47,7 @@ const getCacheContent = async () => {
 
   // Fetching all keys
   const cacheKeys = await caches.keys();
-  console.log(`Loaded cacheKeys: ${cacheKeys.length}`);
+  console.log(`Loaded ${cacheKeys.length} cache(s) `);
   cacheKeys.forEach(cacheKey => console.log(`Await cacheKey: ${cacheKey}`));
 
   const openedCaches = await cacheKeys.map(key => caches.open(key));
@@ -55,22 +55,22 @@ const getCacheContent = async () => {
 
   // https://stackoverflow.com/a/37576787/4906586
   // cannot use forEach
-  for (const openingCache of openedCaches) {
-    console.log(`opening cache:`, openingCache);
+  for (const key of cacheKeys) {
+    console.log(`Loading cacheKey: ${key}`);
+    let openedCacheKeysTxt = `<p>${key}</p>`;
 
-    const openedCache = await openingCache;
+    const cache = await caches.open(key);
     console.log(`opened cache:`, openedCache);
-    let openedCachesKeysTxt = `<p>${JSON.stringify(openingCache)}</p>`;
 
-    const openedCachesKeys = await openedCache.keys();
-    openedCachesKeysTxt = openedCachesKeys
+    const cacheKeys = await cache.keys();
+    openedCacheKeysTxt = cacheKeys
       .map(openedCacheKey => {
         console.log(`opened cache key:`, openedCacheKey);
         return `<li>${openedCacheKey.url}</li>`;
       })
       .reduce((a, b) => a + '' + b);
-    openedCachesKeysTxt = `<ul>${openedCachesKeysTxt}</ul>`;
-    document.getElementById('cacheContent').innerHTML += openedCachesKeysTxt;
+      openedCacheKeysTxt = `<ul>${openedCacheKeysTxt}</ul>`;
+    document.getElementById('cacheContent').innerHTML += openedCacheKeysTxt;
   }
 };
 
