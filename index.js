@@ -62,7 +62,7 @@ const getCacheContent = () => {
       });
       return cacheContent;
     })
-    .then(() => {
+    .then(cacheContent => {
       log(`Cache getting: end => ${cacheContent}`);
       document.getElementById('cacheContent').innerHTML += cacheContent;
       return cacheContent;
