@@ -44,6 +44,19 @@ const clearCacheStorage = () => {
 const getCacheContent = () => {
   log(`Cache getting: start`);
   let cacheContent = '';
+
+  // Fetching all keys
+  const cacheKeys = await caches.keys();
+
+  cacheKeys.forEach(cacheKey => console.log(`Await cacheKey: ${cacheKey}`));
+
+  const openedCaches = await caches.keys().map(key => caches.open(key));
+
+  openedCaches.forEach(openedCache => {
+    console.log(`opened cache: ${openedCache}`);
+    console.log(`${openedCache}`);
+  });
+
   caches
     .keys()
     .then(keyList => {
