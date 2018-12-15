@@ -63,7 +63,7 @@ const getCacheContent = async () => {
     console.log(`opened cache:`, cache);
 
     const cacheKeys = await cache.keys();
-    openedCacheKeysTxt = cacheKeys
+    openedCacheKeysTxt += cacheKeys
       .map(openedCacheKey => {
         console.log(`opened cache key:`, openedCacheKey);
         return `<li>${openedCacheKey.url}</li>`;
