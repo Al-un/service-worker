@@ -56,6 +56,11 @@ const getCacheContent = async () => {
   openedCaches.forEach(openedCache => {
     console.log(`opened cache: ${openedCache}`);
     console.log(`${openedCache}`);
+    const openedCachesKeys = await openedCache.keys();
+    openedCachesKeys.forEach(openedCacheKey => {
+      console.log(`opened cache key: ${openedCacheKey}`);
+      console.log(`${openedCacheKey}`);
+    });
   });
 
   caches

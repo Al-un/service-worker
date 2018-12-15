@@ -2,7 +2,7 @@ function log(obj) {
   console.log(obj);
 }
 
-const CACHE_VERSION = 'sw-v2';
+const CACHE_VERSION = 'sw-v3';
 const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
 
 /**
@@ -28,7 +28,7 @@ self.addEventListener('activate', event => {
       return Promise.all(
         keys.map((key, index) => {
           if (key !== CACHE_VERSION) {
-            return caches.delete(keys[index]);
+            // return caches.delete(keys[index]);
           }
         })
       );
