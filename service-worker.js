@@ -2,7 +2,7 @@ function log(obj) {
   console.log(obj);
 }
 
-const CACHE_VERSION = 'sw-v4';
+const CACHE_VERSION = 'sw-v5';
 const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
 const CACHE_PREFIX = 'service-workers/';
 
