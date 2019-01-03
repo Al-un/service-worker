@@ -4,6 +4,7 @@ function log(obj) {
 
 const CACHE_VERSION = 'sw-v4';
 const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
+const CACHE_PREFIX = 'service-workers/';
 
 /**
  * Installing SW
@@ -11,7 +12,7 @@ const CACHE_FILES = ['index.html', 'img/miku.png', 'index.js', 'main.css'];
 self.addEventListener('install', event => {
   log('[SW] installing');
   event.waitUntil(
-    caches.open(CACHE_VERSION).then(cache => {
+    caches.open(CACHE_PREFIX + CACHE_VERSION).then(cache => {
       log(`Opening cache version ${CACHE_VERSION}`);
       return cache.addAll(CACHE_FILES);
     })
@@ -27,8 +28,12 @@ self.addEventListener('activate', event => {
     caches.keys().then(keys => {
       return Promise.all(
         keys.map((key, index) => {
-          if (key !== CACHE_VERSION) {
-            // return caches.delete(keys[index]);
+          // Start with right prefix but wrong version: delete cache
+          if (
+            key !== CACHE_PREFIX + CACHE_VERSION &&
+            key.startsWith(CACHE_PREFIX)
+          ) {
+            return caches.delete(keys[index]);
           }
         })
       );
@@ -43,6 +48,7 @@ self.addEventListener('fetch', event => {
   log(`[SW] fetching URL ${event.request.url}`);
   event.respondWith(
     caches.match(event.request).then(res => {
+      // network first?
       if (res) {
         return res;
       }
